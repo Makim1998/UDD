@@ -1,0 +1,74 @@
+<app-form-container>
+    <h2>Prijava za posao</h2>
+    <form [formGroup]="requestForm">
+        <div [class.disabled]="requestPending">
+            <mat-form-field>
+                <mat-label>Ime</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="ime">
+                <mat-error>
+                    Unesite ime!
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Prezime</mat-label>
+              <input 
+              matInput 
+              autocomplete="off"
+              formControlName="prezime">
+              <mat-error>
+                  Unesite prezime!
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Stepen strucne spreme</mat-label>
+                <mat-select formControlName="tip">
+                  <mat-option *ngFor="let stepen of stepeni" [value]="stepen">
+                    {{stepen}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  Unesite stepen strucne spreme!
+                </mat-error>
+            </mat-form-field>
+
+                <input type="file" class="file-input"
+                (change)="onFileSelected($event)" #fileUpload>
+
+                <div class="file-upload">
+
+                {{fileName || "Prilozi CV"}}
+
+                    <button mat-mini-fab color="primary" class="upload-btn"
+                    (click)="fileUpload.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </div>
+
+                <input type="file" class="file-input"
+                (change)="onFile2Selected($event)" #fileUpload2>
+
+                <div class="file-upload">
+
+                {{fileName2 || "Prilozi propratno pismo"}}
+
+                    <button mat-mini-fab color="primary" class="upload-btn"
+                    (click)="fileUpload2.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </div>
+            
+        </div>
+        <br>
+        <app-center-container>
+            <button 
+            *ngIf="!requestPending"
+            mat-raised-button 
+            color="primary"
+            (click)="request()">Posalji</button>
+            <app-spinner-button *ngIf="requestPending"></app-spinner-button>
+        </app-center-container>
+    </form>
+</app-form-container>
