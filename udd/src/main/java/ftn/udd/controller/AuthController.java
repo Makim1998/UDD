@@ -41,7 +41,10 @@ public class AuthController {
 	
 	@PostMapping(value = "/login")
 	public ResponseEntity<ProfileDTO> login(@Valid @RequestBody LoginDTO loginDTO){
+		System.out.println(loginDTO.getEmail());
+		System.out.println(loginDTO.getPassword());
 		this.authManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
+		System.out.println("prosla auten");
 		String accessToken = this.tokenUtils.generateToken(loginDTO.getEmail());
 		System.out.println(accessToken);
 		User user = (User) this.userService.loadUserByUsername(loginDTO.getEmail());

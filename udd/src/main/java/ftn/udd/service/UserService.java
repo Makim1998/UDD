@@ -21,7 +21,8 @@ public class UserService implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) {
-		return this.userRepository.findByEmail(username);	
+		return this.userRepository.findByEmail(username);
+		
 	}
 	
 	@Transactional(readOnly = false)
