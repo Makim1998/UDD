@@ -1,6 +1,6 @@
 .content
 {
-    background-color: white;
+    background-color: rgb(253, 250, 250);
     height: 100%;
     overflow: hidden;  /*if you don't want #second to wrap below #first */
 }

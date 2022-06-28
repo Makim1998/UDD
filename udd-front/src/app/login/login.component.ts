@@ -39,7 +39,10 @@ export class LoginComponent implements OnInit {
           this.loginPending = false;
           if (user){
             this.authService.saveUser(user);
-            this.router.navigate(['/home']);
+            if (user.role === "client"){
+              this.router.navigate(['/home/request']);
+            }
+            this.router.navigate(['/home/search']);
           }
           else{
             this.snackBar.open("Pogresni email ili lozinka!", SNACKBAR_CLOSE, SNACKBAR_ERROR_OPTIONS);

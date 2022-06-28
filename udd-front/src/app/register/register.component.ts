@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   registerPending = false;
   registerForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required,
-    Validators.pattern(new RegExp('\\S'))]),
+    Validators.pattern(new RegExp('\\d{16}'))]),
     lastName: new FormControl('', [Validators.required,
     Validators.pattern(new RegExp('\\S'))]),
     email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'),

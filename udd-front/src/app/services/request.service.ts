@@ -17,7 +17,7 @@ export class RequestService {
 
 
     request(formData: FormData): Observable<any> {
-      return this.http.post(`${this.API_REQUEST}/register`, formData).pipe(map((data: any) => {
+      return this.http.post(`${this.API_REQUEST}`, formData).pipe(map((data: any) => {
         return data;
       }));
     }

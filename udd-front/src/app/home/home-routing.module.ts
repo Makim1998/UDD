@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { REQUEST_PATH } from '../constants/routes';
+import { REQUEST_PATH, SEARCH_PATH } from '../constants/routes';
 import { HomeComponent } from './home.component';
+import { PretragaComponent } from './pretraga/pretraga.component';
 import { PrijavaComponent } from './prijava/prijava.component';
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: REQUEST_PATH,
         component: PrijavaComponent
+      },
+      {
+        path: SEARCH_PATH,
+        component: PretragaComponent
       },
     ]
 },];

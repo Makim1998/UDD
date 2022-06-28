@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Request } from 'src/app/models/request';
 import { RequestService } from 'src/app/services/request.service';
 
 @Component({
@@ -51,18 +52,23 @@ export class PrijavaComponent implements OnInit {
 
     if (file) {
         this.fileName2 = file.name;
-        this.file2 = this.file2;
+        this.file2 = file;
     }
   }
 
-  onSubmit(){
+  request(){
     const formData: FormData = new FormData();
     
     formData.append('file1', this.file1);
     formData.append('file2', this.file2);
+    const r: Request = {
+      ime: 'My Category',
+      prezime: 'My Description',
+      stepen: 'moj stepen'
+    };
 
     formData.append('user', new Blob([JSON
-      .stringify(this.requestForm)], {
+      .stringify(r)], {
       type: 'application/json'
     }));
 

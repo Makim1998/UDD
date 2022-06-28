@@ -1,0 +1,54 @@
+<app-form-container>
+    <h2>Pretraga prilozenih prijava</h2>
+    <form [formGroup]="searchForm">
+        <div [class.disabled]="searchPending">
+            <mat-form-field id="inline">
+                <mat-label>Ime</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="ime">
+                <mat-error>
+                    Unesite ime!
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field id="inline">
+              <mat-label>Prezime</mat-label>
+              <input 
+              matInput 
+              autocomplete="off"
+              formControlName="prezime">
+              <mat-error>
+                  Unesite prezime!
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" id="inline">
+                <mat-label>Stepen strucne spreme</mat-label>
+                <mat-select formControlName="stepen">
+                  <mat-option *ngFor="let stepen of stepeni" [value]="stepen">
+                    {{stepen}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  Unesite stepen strucne spreme!
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field id= "block">
+                <mat-label>Sadrzaj propratnog pisma</mat-label>
+                <input 
+                matInput
+                autocomplete="off"
+                formControlName="sadrzaj">
+            </mat-form-field>             
+        </div>
+        <br>
+        <app-center-container>
+            <button 
+            *ngIf="!searchPending"
+            mat-raised-button 
+            color="primary"
+            (click)="search()">Pretraga</button>
+            <app-spinner-button *ngIf="searchPending"></app-spinner-button>
+        </app-center-container>
+    </form>
+</app-form-container>

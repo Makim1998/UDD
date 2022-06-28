@@ -7,12 +7,14 @@ import { PrijavaComponent } from './prijava/prijava.component';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from '../layout/layout.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PretragaComponent } from './pretraga/pretraga.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    PrijavaComponent
+    PrijavaComponent,
+    PretragaComponent
   ],
   imports: [
     CommonModule,
