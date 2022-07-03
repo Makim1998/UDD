@@ -8,6 +8,7 @@ export const environment = {
   apiAuth: 'auth',
   apiUser: 'users',
   apiReq: 'request',
+  apiSearch: 'search'
 };
 
 /*

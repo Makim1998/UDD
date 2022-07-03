@@ -40,8 +40,11 @@ export class LoginComponent implements OnInit {
           if (user){
             this.authService.saveUser(user);
             if (user.role === "client"){
+              console.log("client");
               this.router.navigate(['/home/request']);
+              return;
             }
+            console.log("admin");
             this.router.navigate(['/home/search']);
           }
           else{

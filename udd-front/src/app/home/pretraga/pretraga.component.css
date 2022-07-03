@@ -5,6 +5,9 @@
 #block{
     display: block;
 }
+.uska{
+    max-width: 80px;
+}
 .mat-form-field-wrapper {
     padding-bottom: 0;
 }
