@@ -1,13 +1,24 @@
 package ftn.udd.DTO;
 
+import java.util.Date;
+
 public class SearchResultDTO {
-	
+	private Date datum;
 	private String ime;
 	private String prezime;
-	private String highlight;
+	private String stepen;
+	private String sazetak;
 	
 	public SearchResultDTO() {
 		super();
+	}
+
+	public Date getDatum() {
+		return datum;
+	}
+
+	public void setDatum(Date datum) {
+		this.datum = datum;
 	}
 
 	public String getIme() {
@@ -26,12 +37,20 @@ public class SearchResultDTO {
 		this.prezime = prezime;
 	}
 
-	public String getHighlight() {
-		return highlight;
+	public String getStepen() {
+		return stepen;
 	}
 
-	public void setHighlight(String highlight) {
-		this.highlight = highlight;
+	public void setStepen(String stepen) {
+		this.stepen = stepen;
+	}
+
+	public String getSazetak() {
+		return sazetak;
+	}
+
+	public void setSazetak(String sazetak) {
+		this.sazetak = sazetak;
 	}
 		
 }

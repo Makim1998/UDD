@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ftn.udd.DTO.SearchItemsDTO;
 import ftn.udd.DTO.SearchRequestDTO;
 import ftn.udd.DTO.SearchResultDTO;
 import ftn.udd.lucene.model.IndexUnit;
@@ -34,7 +35,13 @@ public class SearchService {
 		this.client = client;
 	}
 	
-	public List<SearchResultDTO> search(SearchRequestDTO dto){
+	public List<SearchResultDTO> search(SearchItemsDTO dto){
+		SearchRequest request = SearchUtil.buildBooleanSearchRequest(IndexUnit.INDEX_NAME, dto);
+		return searchInternal(request);
+		
+	}
+	
+	public List<SearchResultDTO> searchBase(SearchRequestDTO dto){
 		SearchRequest request = SearchUtil.buildSearchRequest(IndexUnit.INDEX_NAME, dto);
 		return searchInternal(request);
 		
@@ -42,21 +49,19 @@ public class SearchService {
 	
 	private List<SearchResultDTO> searchInternal(SearchRequest request){
 		if (request == null) {
-			System.out.println("wtf nekad smo bili bff");
 			return Collections.emptyList();
 		}
 		try {
-			System.out.println("klijent");
 			SearchResponse response = client.search(request, RequestOptions.DEFAULT);
 			SearchHit[] searchHits = response.getHits().getHits();
-			System.out.println("sta je misevi");
+
 			List<SearchResultDTO> cvs = new ArrayList<>(searchHits.length);
-			System.out.println("sta se desilo");
-			System.out.println(searchHits.length);
 			for (SearchHit hit: searchHits) {
-				System.out.println(hit.getSourceAsString());
-				IndexUnit i = mapper.readValue(hit.getSourceAsString(), IndexUnit.class);
-				System.out.println("fatanena");
+				String junk = hit.getSourceAsString();
+				System.out.println(junk);
+				String without_junk = "{" + junk.substring(junk.indexOf(',') + 1);
+				System.out.println(without_junk);
+				IndexUnit i = mapper.readValue(without_junk, IndexUnit.class);
 				cvs.add(cvMapper.map(i));
 			}
 			return cvs;

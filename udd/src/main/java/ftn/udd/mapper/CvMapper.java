@@ -12,6 +12,9 @@ public class CvMapper {
 		SearchResultDTO res = new SearchResultDTO();
 		res.setIme(i.getIme());
 		res.setPrezime(i.getPrezime());
+		res.setStepen(i.getStepen());
+		res.setDatum(i.getDatum());
+		res.setSazetak(i.getText());
 		return res;
 	}
 	

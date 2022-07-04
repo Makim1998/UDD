@@ -10,9 +10,11 @@ import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.springframework.stereotype.Component;
 
 import ftn.udd.lucene.model.IndexUnit;
 
+@Component
 public class PDFHandler extends DocumentHandler {
 
 	@Override

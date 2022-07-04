@@ -2,7 +2,7 @@
     <h2>Pretraga prilozenih prijava</h2>
     <form [formGroup]="searchForm">
         <div [class.disabled]="searchPending">
-            <mat-form-field class= 'uska' appearance="fill" id="inline">
+            <mat-form-field class="uska" appearance="fill" id="inline">
                 <mat-label>&</mat-label>
                 <mat-select formControlName="operator1">
                   <mat-option *ngFor="let op of operatori" [value]="op">
@@ -21,7 +21,7 @@
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field class= 'uska' appearance="fill" id="inline">
+            <mat-form-field class="uska" appearance="fill" id="inline">
                 <mat-label>&</mat-label>
                 <mat-select formControlName="operator2">
                   <mat-option *ngFor="let op of operatori" [value]="op">
@@ -40,7 +40,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field class= 'uska' appearance="fill" id="inline">
+            <mat-form-field class="uska" appearance="fill" id="inline">
                 <mat-label>&</mat-label>
                 <mat-select formControlName="operator3">
                   <mat-option *ngFor="let op of operatori" [value]="op">
@@ -73,8 +73,41 @@
             *ngIf="!searchPending"
             mat-raised-button 
             color="primary"
-            (click)="test()">Pretraga</button>
+            (click)="search()">Pretraga</button>
             <app-spinner-button *ngIf="searchPending"></app-spinner-button>
         </app-center-container>
     </form>
 </app-form-container>
+
+<div>
+  <h2>Rezultati pretrage</h2>
+  <table mat-table [dataSource]="rezultati" class="mat-elevation-z8">
+      <ng-container matColumnDef="datum">
+          <th mat-header-cell *matHeaderCellDef>Datum prijave </th>
+          <td mat-cell *matCellDef="let element"> {{element.datum | date : "dd.MM.y"}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="ime">
+          <th mat-header-cell *matHeaderCellDef> Ime </th>
+          <td mat-cell *matCellDef="let element"> {{element.ime}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="prezime">
+          <th mat-header-cell *matHeaderCellDef> Prezime </th>
+          <td mat-cell *matCellDef="let element"> {{element.prezime}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="stepen">
+          <th mat-header-cell *matHeaderCellDef> Stepen obrazovanja </th>
+          <td mat-cell *matCellDef="let element"> {{element.stepen}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sazetak">
+        <th mat-header-cell *matHeaderCellDef> Sazetak </th>
+        <td mat-cell *matCellDef="let element"> {{element.sazetak}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

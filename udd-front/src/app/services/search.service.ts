@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { SearchItems } from '../models/searchItems';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class SearchService {
     readonly API_SEARCH: string = `${environment.baseUrl}/${environment.apiSearch}`;
 
 
-  search(formData: FormData): Observable<any> {
-    return this.http.post(`${this.API_SEARCH}`, formData).pipe(map((data: any) => {
+  search(items: SearchItems): Observable<any> {
+    return this.http.post(`${this.API_SEARCH}`, items).pipe(map((data: any) => {
       return data;
     }));
   }

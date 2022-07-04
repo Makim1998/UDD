@@ -17,3 +17,28 @@
 .mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 0.1em 0 0.5em 0 
 }
+
+table {
+    width: 100%;
+    align-items: center;
+
+}
+
+th.mat-header-cell {
+    text-align: center;
+    font-size: 15px;
+    color: #050505;
+}
+
+td.mat-cell {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+div {
+    margin-left: 20px;
+    margin-right: 20px;
+}

@@ -6,7 +6,11 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -28,7 +32,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ftn.udd.DTO.RequestDTO;
-import ftn.udd.lucene.indexing.Indexer;
+import ftn.udd.lucene.indexing.handlers.PDFHandler;
 import ftn.udd.lucene.model.IndexUnit;
 import ftn.udd.repository.CVRepository;
 
@@ -42,9 +46,8 @@ public class RequestController {
 	@Autowired
 	private CVRepository cvRepository;
 	
-	
 	@Autowired
-	private Indexer indexer;
+	private PDFHandler pdfHandler;
 	
 	static {
 		ResourceBundle rb=ResourceBundle.getBundle("application");
@@ -79,22 +82,33 @@ public class RequestController {
         
 		Path path = Paths.get(getResourceFilePath(DATA_DIR_PATH).getAbsolutePath());
 		System.out.println(path.toString());
-        System.out.println("nensi fata");
         
-        for (MultipartFile multipartFile : multipartFileList) {
-            //fileList.add(new FileUploader(cvService).uploadCvFile(user, multipartFile));
-        	String orgName = multipartFile.getOriginalFilename();
-            String filePath = path.toString() + '\\' + orgName;
-            File dest = new File(filePath);
-            multipartFile.transferTo(dest);
-        }
-        		
-                
+        DateFormat dateFormat = new SimpleDateFormat("dd_mm_yyyy_hh_mm_ss");  
 	    IndexUnit i = new IndexUnit();
+	    
+	    String orgName = file1.getOriginalFilename();
+        Date date = Calendar.getInstance().getTime();  
+        String strDate = dateFormat.format(date);  
+
+        String filePath = path.toString() + '\\' + strDate + orgName;
+        File dest = new File(filePath);
+        file1.transferTo(dest);
+        
+        String orgName2 = file1.getOriginalFilename();
+        Date date2 = Calendar.getInstance().getTime();  
+        String strDate2 = dateFormat.format(date2);  
+
+        String filePath2 = path.toString() + '\\' + strDate2 + orgName2;
+        File dest2 = new File(filePath2);
+        file2.transferTo(dest2);
+        
+        //ucitavanje sadrzaja propratnog pisma
+    	i.setText(pdfHandler.getText(dest2));
 	    i.setIme(r.getIme());
 	    i.setPrezime(r.getPrezime());
 	    i.setStepen(r.getStepen());
 	    i.setFilename(file1.getOriginalFilename());
+	    i.setDatum(Calendar.getInstance().getTime());
         cvRepository.save(i);
         return ResponseEntity.ok(HttpStatus.OK);
 
